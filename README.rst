@@ -1,5 +1,5 @@
 Notification Service API Documentation
-=====================================
+=========================================
 
 Introduction
 ------------
