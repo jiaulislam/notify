@@ -23,7 +23,6 @@ You can **send email** to customer email address.
 """
 
 app = FastAPI(
-    version="0.1.0",
     openapi_tags=metadata.metadata_tags,
     openapi_url=f"{API_VERSION_V1}/openapi.json",
     docs_url=f"{API_VERSION_V1}/docs",
