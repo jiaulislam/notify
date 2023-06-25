@@ -12,7 +12,7 @@ from notify.schemas.healthcheck import (
 
 logging = get_logger(__name__)
 
-router = APIRouter()
+router = APIRouter(tags=["RootService"])
 
 
 @router.get(

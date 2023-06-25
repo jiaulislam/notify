@@ -2,40 +2,9 @@ from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 
 from notify.routes import router
-from notify.util import metadata
+from notify.util.metadata import description, metadata_tags
 
 API_VERSION_V1 = "/api/v1"
-
-description = """
-![Notify API](https://pragatilife.com/images/banners/pragati-Life-Ins-Logo-Eng.png)
-
-    PLIL Notify API helps send notifications to customers with SMS/Email. 🚀
-
-## 📱 SMS
-- You can **send sms** to customer phone number.
-- Get Recent **sent sms** list (last 100 sms).
-- Send bulk sms.
-
-## 📤 Email
-
-You can **send email** to customer email address.
-
-"""
-
-app = FastAPI(
-    openapi_tags=metadata.metadata_tags,
-    openapi_url=f"{API_VERSION_V1}/openapi.json",
-    docs_url=f"{API_VERSION_V1}/docs",
-    redoc_url=f"{API_VERSION_V1}/redoc",
-    description=description,
-    contact={
-        "name": "Jiaul Islam Jibon",
-        "url": "https://jiaulislam.github.io",
-        "email": "jiaulislam.ict.bd@gmail.com",
-    },
-)
-
-app.include_router(router.app_router, prefix=API_VERSION_V1)
 
 
 def custom_openapi():
@@ -46,6 +15,12 @@ def custom_openapi():
         version="0.1.0",
         description=description,
         routes=app.routes,
+        tags=metadata_tags,
+        contact={
+            "name": "Jiaul Islam Jibon",
+            "url": "https://jiaulislam.github.io",
+            "email": "jiaulislam.ict.bd@gmail.com",
+        },
     )
     openapi_schema["info"]["x-logo"] = {
         "url": "https://pragatilife.com/images/banners/pragati-Life-Ins-Logo-Eng.png"
@@ -53,6 +28,15 @@ def custom_openapi():
     openapi_schema["info"]["x-logo"]["altText"] = "Pragati Life Banner"
     app.openapi_schema = openapi_schema
     return app.openapi_schema
+
+
+app = FastAPI(
+    openapi_url=f"{API_VERSION_V1}/openapi.json",
+    docs_url=f"{API_VERSION_V1}/docs",
+    redoc_url=f"{API_VERSION_V1}/redoc",
+)
+
+app.include_router(router.app_router, prefix=API_VERSION_V1)
 
 
 app.openapi = custom_openapi
