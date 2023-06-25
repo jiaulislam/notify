@@ -12,6 +12,11 @@ metadata_tags = [
         "description": "All Email handler services",
         "summary": "Send Emails To Customers",
     },
+    {
+        "name": "SMSService",
+        "description": "All SMS handler services",
+        "summary": "Send SMS To Customers",
+    },
 ]
 
 description = """

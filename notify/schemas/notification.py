@@ -17,7 +17,7 @@ class EmailNotifier(Notifier):
     email: EmailStr
 
 
-class PhoneNotifier(Notifier):
+class SMSNotifier(Notifier):
     phone: str
 
 
@@ -29,5 +29,5 @@ class EmailPayload(RequestPayload):
     body: EmailNotifier
 
 
-class PhonePayload(RequestPayload):
-    body: PhoneNotifier
+class SMSPayload(RequestPayload):
+    body: SMSNotifier
