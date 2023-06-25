@@ -22,9 +22,6 @@ def lapsed_policy_email(payload: EmailNotifier) -> str:
                     </p>
                     <p>Your premium fee request for Policy No: {payload.policy_no} could no longer processed the use of bKash/Nagad due to lapsed over 3 months.</p><br>
                     <p>For any query reach us at : <span>880-2-9124024</span></p>
-                    <p>With Regards,<br>
-                        Pragati Life Insurance Ltd.
-                    </p>
                     <br>
                     <p style="color: #999999; font-family: Arial;">**This is a system-generated email. Please do not reply to this message.</p>
                     <div>
