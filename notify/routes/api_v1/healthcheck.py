@@ -1,13 +1,16 @@
 from typing import Mapping
 
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Request, status
 
 from notify.enums import APIStatusEnum
+from notify.logging import get_logger
 from notify.schemas.healthcheck import (
     HealtCheckDown,
     HealtCheckUp,
     HealtCheckUpgradation,
 )
+
+logging = get_logger(__name__)
 
 router = APIRouter()
 
@@ -30,11 +33,13 @@ router = APIRouter()
     summary="API server health check route",
     description="This route is used to perform a health check on the API server.",
 )
-def healthcheck() -> Mapping[str, APIStatusEnum | str]:
+async def healthcheck(request: Request) -> Mapping[str, APIStatusEnum | str]:
     """
     Perform a health check on the API server.
 
     Returns:
         A response containing the API status and a message indicating whether the API is working correctly.
     """
+    headers = request.headers
+    logging.debug(f"healthcheck route called by host: {headers}")
     return {"api_status": APIStatusEnum.ALIVE, "message": "api is working ok"}
