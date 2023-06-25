@@ -1,5 +1,6 @@
 ### Custom Ignores ###
 /.prod.env
+/prod.env
 /.vscode
 
 ### NextJS ###
