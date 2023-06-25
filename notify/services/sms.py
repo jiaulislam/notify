@@ -28,7 +28,7 @@ async def send_sms(payload: SMSPayload) -> SSLWirelessResponse:
 
     match payload.event_type:
         case MsgTypeEnum.LAPSED:
-            sms_text = f"Dear Customer Due to the 90-day premium grace period having expired, your policy, ID# {payload.body.policy_no}, has lapsed. Inquire with PLIL."
+            sms_text = f"Dear Customer, Due to the 90-day premium grace period having expired, your policy, ID# {payload.body.policy_no}, has lapsed. Inquire with PLIL."
         case _:
             if not payload.body.bill_activation_date:
                 raise ValueError("Invalid bill_activation_date or None !")
