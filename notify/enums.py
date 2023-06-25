@@ -10,3 +10,4 @@ class APIStatusEnum(str, Enum):
 class MsgTypeEnum(str, Enum):
     LAPSED = "lapsed"
     NO_DUE = "no_due"
+    PREMIUM_PAID = "premium_paid"

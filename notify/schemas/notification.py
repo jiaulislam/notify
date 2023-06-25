@@ -8,10 +8,12 @@ from notify.schemas import BaseSchema
 
 class Notifier(BaseSchema):
     user_name: str
+    policy_no: str
     bill_activation_date: date | None = None
 
 
 class EmailNotifier(Notifier):
+    premium_amount: float
     email: EmailStr
 
 
