@@ -18,7 +18,7 @@ description = """
 
 ## 📤 Email
 
-You can **send email** to customer phone number.
+You can **send email** to customer email address.
 
 """
 
