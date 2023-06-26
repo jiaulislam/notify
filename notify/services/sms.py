@@ -33,7 +33,7 @@ async def send_sms(payload: SMSPayload) -> SSLWirelessResponse:
             if not payload.body.bill_activation_date:
                 raise ValueError("Invalid bill_activation_date or None !")
             activate_date = payload.body.bill_activation_date.strftime("%d-%b-%Y")
-            sms_text = f"Dear Customer, Your next PAYBILL(bkash/nagad) activation due date is {activate_date} for policy No# {payload.body.policy_no}."
+            sms_text = f"Dear Customer, there are no payments due at this time for policy No# {payload.body.policy_no}. The date of the next paybill (bkash/nagad) is {activate_date}."
 
     params: QueryParamTypes = {
         "user": configs.sslwireless_user,

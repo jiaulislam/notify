@@ -22,7 +22,7 @@ metadata_tags = [
 description = """
 ![Notify API](https://pragatilife.com/images/banners/pragati-Life-Ins-Logo-Eng.png)
 
-    PLIL Notify API helps send notifications to customers with SMS/Email. 🚀
+    Notify API helps send notifications to customers with SMS/Email. 🚀
 
 ## 📱 SMS
 - You can **send sms** to customer phone number.
