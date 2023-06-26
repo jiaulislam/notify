@@ -1,0 +1,23 @@
+[Unit]
+Description=Hypercorn H2 API Server For Notification Service
+After=network.target
+
+[Service]
+User=webapps
+Group=webapps
+WorkingDirectory=/home/webapps/notify
+Environment="PATH=/home/webapps/.cache/pypoetry/virtualenvs/notify-2DU74qw4-py3.11/bin"
+EnvironmentFile=/home/webapps/notify/prod.env
+ExecStart=/home/webapps/.cache/pypoetry/virtualenvs/notify-2DU74qw4-py3.11/bin/hypercorn \
+    --bind 0.0.0.0:8080 \
+    --workers 3 \
+    --worker-class uvloop \
+    --access-logfile /home/webapps/notify/hypercornlogs/access.log \
+    --error-logfile /home/webapps/notify/hypercornlogs/error.log \
+    --access-logformat '%(h)s %(l)s %(u)s "%({X-Real-IP}i)s" "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"' \
+    notify:app
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
