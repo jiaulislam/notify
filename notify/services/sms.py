@@ -45,9 +45,7 @@ async def send_sms(payload: SMSPayload) -> SSLWirelessResponse:
     }
 
     async with AsyncClient(headers=HEADERS) as client:
-        response = await client.get(
-            configs.sslwireless_base_url, params=params, headers=HEADERS
-        )
+        response = await client.get(configs.sslwireless_base_url, params=params)
         try:
             response = parse_xml_response(response.content.decode("utf-8"))
         except AttributeError as err:
