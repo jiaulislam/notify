@@ -12,7 +12,7 @@ def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
     openapi_schema = get_openapi(
-        title="PLIL Notify",
+        title="Notify",
         version="0.1.0",
         description=description,
         routes=app.routes,

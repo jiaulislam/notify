@@ -28,12 +28,12 @@ async def send_sms(payload: SMSPayload) -> SSLWirelessResponse:
 
     match payload.event_type:
         case MsgTypeEnum.LAPSED:
-            sms_text = f"Dear Customer, Due to the 90-day premium grace period having expired, your policy, ID# {payload.body.policy_no}, has lapsed. Inquire with PLIL."
+            sms_text = f"Dear Customer, Due to the 90-day premium grace period having expired, your policy No# {payload.body.policy_no}, has lapsed. Inquire with PLIL."
         case _:
             if not payload.body.bill_activation_date:
                 raise ValueError("Invalid bill_activation_date or None !")
             activate_date = payload.body.bill_activation_date.strftime("%d-%b-%Y")
-            sms_text = f"Dear Customer, Your Policy-{payload.body.policy_no} next PAYBILL (bkash/nagad) activation due date is {activate_date}."
+            sms_text = f"Dear Customer, there are no payments due at this time for policy No# {payload.body.policy_no}. The date of the next paybill (bkash/nagad) is {activate_date}."
 
     params: QueryParamTypes = {
         "user": configs.sslwireless_user,
@@ -45,9 +45,12 @@ async def send_sms(payload: SMSPayload) -> SSLWirelessResponse:
     }
 
     async with AsyncClient(headers=HEADERS) as client:
-        response = await client.get(
-            configs.sslwireless_base_url, params=params, headers=HEADERS
-        )
-        response = parse_xml_response(response.content.decode("utf-8"))
-        logging.info(f"SUCCESS: SMS Response RAW : {response.json()}")
-        return response
+        response = await client.get(configs.sslwireless_base_url, params=params)
+        try:
+            response = parse_xml_response(response.content.decode("utf-8"))
+        except AttributeError as err:
+            logging.exception(err)
+            raise err
+        else:
+            logging.info(f"SUCCESS: SMS Response RAW : {response.json()}")
+            return response
